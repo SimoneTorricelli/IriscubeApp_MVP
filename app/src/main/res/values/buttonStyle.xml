@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+<style name="ButtonStyle">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:radius">10dp</item>
+    <item name="android:padding">10dp</item>
+    <item name="cornerRadius">10dp</item>
+    <item name="circleRadius">20dp</item>
+    <item name="android:minWidth">88dp</item>
+    <item name="android:minHeight">36dp</item>
+    <item name="android:layout_margin">10dp</item>
+    <item name="android:elevation">20dp</item>
+    <item name="android:translationZ">1dp</item>
+    <item name="android:background">@color/light_brown</item>
+</style>
+</resources>

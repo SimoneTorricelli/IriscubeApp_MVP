@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 object Repository {
     private var client = RetrofitClient.retrofit
 
-    suspend fun getMovement(context : Context) = withContext(Dispatchers.IO) {
+    suspend fun getMovement() = withContext(Dispatchers.IO) {
         try {
             client.getMovement()
         } catch (cause: Throwable) {

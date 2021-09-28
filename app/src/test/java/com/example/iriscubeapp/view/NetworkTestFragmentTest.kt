@@ -1,13 +1,17 @@
 package com.example.iriscubeapp.view
 
 import SampleData
+import com.example.iriscubeapp.presenter.NetworkTestPresenter
 import junit.framework.TestCase
 import retrofit2.Response
 
 class NetworkTestFragmentTest : TestCase() {
 
-    fun testOnCreate(response: Response<Array<SampleData>>) {
-        return
+    private val presenter = NetworkTestPresenter()
+
+    fun testOnCreate() {
+        presenter.getMovement()
+
     }
 
     fun testOnCreateView() {}

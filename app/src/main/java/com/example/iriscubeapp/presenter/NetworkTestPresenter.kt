@@ -1,5 +1,6 @@
 package com.example.iriscubeapp.presenter
 
+import SampleData
 import android.content.Context
 import com.example.iriscubeapp.contract.NetworkTestContract
 import com.example.iriscubeapp.model.networking.Repository
@@ -9,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+import kotlin.random.Random
 
 class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
     /**
@@ -28,11 +30,25 @@ class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
         this.view = view
     }
 
+    override fun insertMovement(movementTitle: String?, movementDescription: String?,movementValue: Double?) {
+        if (movementTitle == null || movementDescription == null || movementValue == null) {
+            return
+        }
 
-    override fun getMovement(context: Context) {
+        val newMovement = SampleData(
+            Random.nextLong(),
+            movementTitle,
+            movementValue,
+            //image,
+            movementDescription,
+        )
+
+    }
+
+    override fun getMovement() {
         launch {
             try {
-                val response = Repository.getMovement(context)
+                val response = Repository.getMovement()
                 println("response in NetworkTestPresenter : $response")
                 view?.onMovementsAvailable(response)
             } catch (error: MovementException) {

@@ -75,7 +75,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         nextTodoButton.setOnClickListener {
-            context?.let { it1 -> presenter.getMovement(it1) }
+            presenter.getMovement()
 
         }
     }
@@ -90,7 +90,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
                 val movementDescription = "d"
                 val movementValue = 1.0
 
-                insertMovement(movementName, movementDescription,movementValue)
+                presenter.insertMovement(movementName, movementDescription,movementValue)
             }
         }
     }
@@ -119,20 +119,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         return@coroutineScope list
             }
 
-    fun insertMovement(movementTitle: String?, movementDescription: String?,movementValue: Double?) {
-        if (movementTitle == null || movementDescription == null || movementValue == null) {
-            return
-        }
-
-        val newMovement = SampleData(
-            Random.nextLong(),
-            movementTitle,
-            movementValue,
-            //image,
-            movementDescription,
-        )
-
-    }
 
     @SuppressLint("SetTextI18n")
     private fun adapterOnClick(movement: SampleData) {

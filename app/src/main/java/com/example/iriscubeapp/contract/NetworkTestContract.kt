@@ -22,6 +22,7 @@ interface NetworkTestContract {
      * */
     interface Presenter {
         fun bindView(view: View)
-        fun getMovement(context: Context)
+        fun getMovement()
+        fun insertMovement(movementTitle: String?, movementDescription: String?,movementValue: Double?)
     }
 }

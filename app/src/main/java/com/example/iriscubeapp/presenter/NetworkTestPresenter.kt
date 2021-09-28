@@ -1,8 +1,9 @@
 package com.example.iriscubeapp.presenter
 
+import android.content.Context
 import com.example.iriscubeapp.contract.NetworkTestContract
 import com.example.iriscubeapp.model.networking.Repository
-import com.example.iriscubeapp.model.networking.TodoException
+import com.example.iriscubeapp.model.networking.MovementException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,15 +28,17 @@ class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
         this.view = view
     }
 
-    override fun getMovement() {
+
+    override fun getMovement(context: Context) {
         launch {
             try {
-                val response = Repository.getMovement()
+                val response = Repository.getMovement(context)
+                println("response in NetworkTestPresenter : $response")
                 view?.onMovementsAvailable(response)
-            } catch (error: TodoException) {
-                view?.onMovementsError()
+            } catch (error: MovementException) {
+                view?.onMovementsError(error)
             } catch (genericError: Exception) {
-                view?.onMovementsError()
+                view?.onMovementsError(genericError)
             }
         }
     }

@@ -11,4 +11,4 @@ data class Todo(
     val completed: Boolean = false
 )
 
-data class TodoException(override val message: String, override val cause: Throwable) : Exception()
+data class MovementException(override val message: String, override val cause: Throwable) : Exception()

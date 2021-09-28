@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.exampleapp.recycleBankMovement.HeaderAdapter
 import com.example.exampleapp.recycleBankMovement.RecycleMovementAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.exampleapp.recycleBankMovement.MovementListViewModel
-import com.example.exampleapp.recycleBankMovement.MovementsListViewModelFactory
+
 import com.example.iriscubeapp.R
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -44,9 +43,7 @@ const val FLOWER_ID = "movement id"
 class FirstFragment : Fragment(){
 
     private val newMovementActivityRequestCode = 1
-    private val movementsListViewModel by viewModels<MovementListViewModel> {
-        MovementsListViewModelFactory(context)
-    }
+
 
 
     override fun onCreateView(
@@ -89,12 +86,12 @@ class FirstFragment : Fragment(){
         }
 
 
-        movementsListViewModel.movementData.observe(viewLifecycleOwner, {
+        /*movementsListViewModel.movementData.observe(viewLifecycleOwner, {
             it.let {
                 movementAdapter.submitList(it as MutableList<SampleData>)
                 headerAdapter.updateMovementCount(it.size)
             }
-        })
+        })*/
 
         addConstraintSetAnimation(view)
 
@@ -223,7 +220,7 @@ class FirstFragment : Fragment(){
                 val movementDescription = "d"
                 val movementValue = 1.0
 
-                movementsListViewModel.insertMovement(movementName, movementDescription,movementValue)
+                //movementsListViewModel.insertMovement(movementName, movementDescription,movementValue)
             }
         }
     }

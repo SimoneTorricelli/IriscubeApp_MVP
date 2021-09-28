@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
     companion object {
-        private const val BASE_URL = "https://mocki.io/v1/4da288b1-5179-4202-8cde-9fb6895f7c69"
+        private const val BASE_URL = "https://mocki.io/v1/"
 
         private val loggingInterceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
         private val okHttpClient = OkHttpClient.Builder()
@@ -24,5 +24,7 @@ class RetrofitClient {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build().create(WebService::class.java)
+
+
     }
 }

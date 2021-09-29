@@ -154,7 +154,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         }
         // below line is use to set cancelable to avoid
         // closing of dialog box when clicking on the screen.
-        dialog?.setCancelable(false)
+        dialog?.setCancelable(true)
 
         // on below line we are setting
         // content view to our view.

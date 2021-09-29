@@ -1,9 +1,11 @@
 package com.example.iriscubeapp.view
 
+import MovementException
 import SampleData
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,10 +22,9 @@ import com.example.exampleapp.recycleBankMovement.HeaderAdapter
 import com.example.exampleapp.recycleBankMovement.RecycleMovementAdapter
 import com.example.iriscubeapp.R
 import com.example.iriscubeapp.contract.NetworkTestContract
-import com.example.iriscubeapp.model.networking.MovementException
-import com.example.iriscubeapp.model.networking.RetrofitClient
 import com.example.iriscubeapp.presenter.NetworkTestPresenter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_network_test.*
 import kotlinx.coroutines.*
@@ -41,7 +42,9 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
 
     private val newMovementActivityRequestCode = 1
     private val presenter = NetworkTestPresenter()
-    val movementAdapter = RecycleMovementAdapter { sampleData -> adapterOnClick(sampleData)}
+    private val movementAdapter =
+        RecycleMovementAdapter { sampleData -> adapterOnClick(sampleData) }
+    private val headerAdapter = HeaderAdapter()
 
 
     /**
@@ -57,10 +60,11 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =   inflater.inflate(R.layout.fragment_network_test, container, false)
-        val headerAdapter = HeaderAdapter()
+        val view = inflater.inflate(R.layout.fragment_network_test, container, false)
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recycle_view)
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = movementAdapter
         recyclerView.apply {
             //edgeEffectFactory = BounceEdgeEffectFactory()
@@ -71,13 +75,26 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         return view
     }
 
+    fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG, color: Int) {
+        val snackbar: Snackbar = Snackbar.make(this, message, duration)
+        snackbar.setBackgroundTint(color)
+        snackbar.show()
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = runBlocking {
         super.onViewCreated(view, savedInstanceState)
+        onGetMovementsClick()
+    }
+
+    fun onGetMovementsClick() {
+
         nextTodoButton.setOnClickListener {
             presenter.getMovement()
+            headerAdapter.updateMovementCount(10)
+
 
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
@@ -90,34 +107,28 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
                 val movementDescription = "d"
                 val movementValue = 1.0
 
-                presenter.insertMovement(movementName, movementDescription,movementValue)
+                presenter.insertMovement(movementName, movementDescription, movementValue)
             }
         }
     }
 
-    private suspend fun getMethod(result: Response<Array<SampleData>> ) : List<SampleData> = coroutineScope {
-        val list = ArrayList<SampleData>()
-        if (result.isSuccessful) {
-                    // Convert raw JSON to pretty JSON using GSON library
-                    val gson = GsonBuilder().setPrettyPrinting().create()
-                    var i = 0
-                    while (i < result.body()?.size ?: 0) {
-                        result.body()?.elementAt(i)?.let { list.add(it) }
-                        //Log.d("LIST JSON :", list.toString())
-                        ++i
-                    }
-                    /*val prettyJson = gson.toJson(
-                        JsonParser.parseString(
-                            response.body()[].toString()
-                                 // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
-                        )
-                    )*/
-                } else {
-                    Log.e("RETROFIT_ERROR", result.code().toString())
+    private suspend fun getMethod(result: Response<Array<SampleData>>): List<SampleData> =
+        coroutineScope {
+            val list = ArrayList<SampleData>()
+            if (result.isSuccessful) {
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                var i = 0
+                while (i < result.body()?.size ?: 0) {
+                    result.body()?.elementAt(i)?.let { list.add(it) }
+                    ++i
                 }
-        println("Lista riempita : $list")
-        return@coroutineScope list
+
+            } else {
+                Log.e("RETROFIT_ERROR", result.code().toString())
             }
+            println("Lista riempita : $list")
+            return@coroutineScope list
+        }
 
 
     @SuppressLint("SetTextI18n")
@@ -129,20 +140,18 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
 
         // on below line we are creating a variable for our button
         // which we are using to dismiss our dialog.
-        val stb = AnimationUtils.loadAnimation(context,R.anim.start_anim_cardview2)
+        val stb = AnimationUtils.loadAnimation(context, R.anim.start_anim_cardview2)
         val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
 
         btnClose.startAnimation(stb)
 
-        val titleText : TextView = view.findViewById(R.id.movement_title2)
-        val valueText : TextView = view.findViewById(R.id.movement_value2)
-        val descriptionText : TextView = view.findViewById(R.id.movement_description2)
+        val titleText: TextView = view.findViewById(R.id.movement_title2)
+        val valueText: TextView = view.findViewById(R.id.movement_value2)
+        val descriptionText: TextView = view.findViewById(R.id.movement_description2)
 
         titleText.text = "Titolo movimento: " + movement.title
         valueText.text = "Quantità movimento: " + movement.value.toString() + " €"
         descriptionText.text = "Descrizione movimento: " + movement.description
-
-
 
 
         // on below line we are adding on click listener
@@ -175,26 +184,18 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     /**
      * [NetworkTestContract.View] implementation
      * */
-    override fun onMovementsAvailable(result: Response<Array<SampleData>>) = runBlocking{
+    override fun onMovementsAvailable(result: Response<Array<SampleData>>): Unit = runBlocking {
         val list = getMethod(result)
         println("RESULT : $list")
         movementAdapter.submitList(list)
+        view?.snack("Lista creata correttamente", color = Color.rgb(80, 170, 80))
     }
 
     override fun onMovementsError(error: MovementException) {
-        Toast.makeText(
-            context,
-            "Oops, impossible to get the movements. $error" ,
-            Toast.LENGTH_LONG
-        ).show()
+        view?.snack("Impossibile creare la lista", color = Color.rgb(180, 40, 80))
     }
 
     override fun onMovementsError(error: Exception) {
-        Toast.makeText(
-            context,
-            "Oops, impossible to get the movements2. $error" ,
-            Toast.LENGTH_LONG
-        ).show()
-
+        view?.snack("Impossibile creare la lista", color = Color.rgb(180, 40, 80))
     }
 }

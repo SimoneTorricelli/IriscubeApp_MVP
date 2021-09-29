@@ -1,13 +1,18 @@
 package com.example.iriscubeapp.model.networking
 
-import android.content.Context
+import MovementException
+import com.example.iriscubeapp.contract.NetworkTestContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-object Repository {
-    private var client = RetrofitClient.retrofit
 
-    suspend fun getMovement() = withContext(Dispatchers.IO) {
+class Repository(var client:WebService) : NetworkTestContract.Repository{
+
+    init {
+        client = RetrofitClient.retrofit
+    }
+
+    override suspend fun getMovement() = withContext(Dispatchers.IO) {
         try {
             client.getMovement()
         } catch (cause: Throwable) {

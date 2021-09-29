@@ -40,8 +40,8 @@ class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>() {
     }
 
     /* Updates header to display number of flowers when a flower is added or subtracted. */
-    fun updateMovementCount(updatedFlowerCount: Int) {
-        movementData = updatedFlowerCount
+    fun updateMovementCount(updateMovementCount: Int) {
+        movementData = updateMovementCount
         notifyDataSetChanged()
     }
 }

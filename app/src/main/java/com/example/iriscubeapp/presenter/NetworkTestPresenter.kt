@@ -1,10 +1,11 @@
 package com.example.iriscubeapp.presenter
 
+import MovementException
 import SampleData
-import android.content.Context
 import com.example.iriscubeapp.contract.NetworkTestContract
 import com.example.iriscubeapp.model.networking.Repository
-import com.example.iriscubeapp.model.networking.MovementException
+import com.example.iriscubeapp.model.networking.RetrofitClient
+import com.example.iriscubeapp.model.networking.WebService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -21,6 +22,13 @@ class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
 
 
     private var view: NetworkTestContract.View? = null
+    private var client: WebService ? = null
+
+    init {
+        client = RetrofitClient.retrofit
+
+    }
+
 
 
     /**
@@ -48,9 +56,11 @@ class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
     override fun getMovement() {
         launch {
             try {
-                val response = Repository.getMovement()
+                val response = client?.let { Repository(client = it).getMovement() }
                 println("response in NetworkTestPresenter : $response")
-                view?.onMovementsAvailable(response)
+                if (response != null) {
+                    view?.onMovementsAvailable(response)
+                }
             } catch (error: MovementException) {
                 view?.onMovementsError(error)
             } catch (genericError: Exception) {

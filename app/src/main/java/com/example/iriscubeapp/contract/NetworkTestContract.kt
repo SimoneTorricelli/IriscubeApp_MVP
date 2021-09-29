@@ -1,8 +1,7 @@
 package com.example.iriscubeapp.contract
 
+import MovementException
 import SampleData
-import android.content.Context
-import com.example.iriscubeapp.model.networking.MovementException
 import com.example.iriscubeapp.presenter.NetworkTestPresenter
 import com.example.iriscubeapp.view.NetworkTestFragment
 import retrofit2.Response
@@ -24,5 +23,9 @@ interface NetworkTestContract {
         fun bindView(view: View)
         fun getMovement()
         fun insertMovement(movementTitle: String?, movementDescription: String?,movementValue: Double?)
+    }
+
+    interface Repository{
+        suspend fun getMovement() : Response<Array<SampleData>>
     }
 }

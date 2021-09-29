@@ -5,6 +5,7 @@ import SampleData
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +32,8 @@ import retrofit2.Response
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer.OnDrawerStateChangeListener
+import nl.dionsegijn.steppertouch.OnStepCallback
+import nl.dionsegijn.steppertouch.StepperTouch
 
 
 class NetworkTestFragment : Fragment(), NetworkTestContract.View {
@@ -45,6 +50,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     private val movementAdapter =
         RecycleMovementAdapter { sampleData -> adapterOnClick(sampleData) }
     private val headerAdapter = HeaderAdapter()
+    private var list : List<SampleData>? = null
 
 
     /**
@@ -70,9 +76,26 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
             //edgeEffectFactory = BounceEdgeEffectFactory()
         }
 
+        val stepperTouch = view.findViewById<StepperTouch>(R.id.stepperTouch)
+        stepperTouch.minValue = 0
+        stepperTouch.maxValue = 10
+        stepperTouch.sideTapEnabled = true
 
+        stepperTouch.addStepCallback(object : OnStepCallback {
+            override fun onStep(value: Int, positive: Boolean) = runBlocking{
+
+                changeAmountList(list,value)
+            }
+        })
 
         return view
+    }
+
+    fun changeAmountList(list: List<SampleData>?,amount:Int){
+        println(amount)
+        movementAdapter.submitList(list?.filter {
+            it.id <= amount
+        })
     }
 
     fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG, color: Int) {
@@ -176,13 +199,13 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
      * [NetworkTestContract.View] implementation
      * */
     override fun onMovementsAvailable(result: Response<Array<SampleData>>): Unit = runBlocking {
-        val list = getMethod(result)
+        list = getMethod(result)
         /* prendo solo gli item con value maggiore di 200.0 €
         list.filter {
          it.value > 200.0
         }
         */
-        if (list.isEmpty()) {           //Solamente se so che la lista non è mai vuota
+        if (list!!.isEmpty()) {           //Solamente se so che la lista non è mai vuota
             onMovementsError(Exception("Error MovementException"))
         } else {
             movementAdapter.submitList(list)

@@ -23,6 +23,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <nl.dionsegijn.steppertouch.StepperTouch
+        android:id="@+id/stepperTouch"
+        app:stepperTextColor="@color/orange_2"
+        android:backgroundTint="@color/orange_2"
+        app:stepperBackgroundColor="@color/orange_1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/card_recycle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextTodoButton" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_recycle"
         android:layout_width="match_parent"
@@ -70,37 +82,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:edPosition="1"
-        app:edMenuSize="260dp"
-        app:edMenuBackground="#dddddd">
 
-        <!--content-->
-        <RelativeLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <!--menu-->
-        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
-            android:id="@+id/menulayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:id="@+id/id_container_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
-
-    </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

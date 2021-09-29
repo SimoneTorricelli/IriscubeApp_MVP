@@ -115,11 +115,10 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
                     result.body()?.elementAt(i)?.let { list.add(it) }
                     ++i
                 }
-
             } else {
+                view?.snack("Impossibile creare la lista", color = Color.rgb(180, 40, 80))
                 Log.e("RETROFIT_ERROR", result.code().toString())
             }
-            println("Lista riempita : $list")
             return@coroutineScope list
         }
 
@@ -173,16 +172,26 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
      * */
     override fun onMovementsAvailable(result: Response<Array<SampleData>>): Unit = runBlocking {
         val list = getMethod(result)
-        println("RESULT : $list")
-        movementAdapter.submitList(list)
-        view?.snack("Lista creata correttamente", color = Color.rgb(80, 170, 80))
+        /* prendo solo gli item con value maggiore di 200.0 €
+        list.filter {
+         it.value > 200.0
+        }
+        */
+        if (list.isEmpty()) {           //Solamente se so che la lista non è mai vuota
+            onMovementsError(Exception("Error MovementException"))
+        } else {
+            movementAdapter.submitList(list)
+            view?.snack("Lista creata correttamente", color = Color.rgb(80, 170, 80))
+        }
     }
 
     override fun onMovementsError(error: MovementException) {
+        Log.d("MovementException : ", error.toString())
         view?.snack("Impossibile creare la lista", color = Color.rgb(180, 40, 80))
     }
 
     override fun onMovementsError(error: Exception) {
+        Log.d("Exception : ", error.toString())
         view?.snack("Impossibile creare la lista", color = Color.rgb(180, 40, 80))
     }
 }

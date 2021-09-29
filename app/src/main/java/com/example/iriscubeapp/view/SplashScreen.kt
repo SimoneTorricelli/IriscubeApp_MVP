@@ -30,7 +30,7 @@ class SplashScreen : AppCompatActivity() {
         )
 
         val diamondImage: ImageView = findViewById(R.id.SplashScreenImage)
-
+        //Insert my custom png to diamonImage
         val assetManager: AssetManager? = applicationContext?.assets
         try {
             assetManager?.let {
@@ -50,6 +50,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             println("AVVIO ATTIVITA DA SPLASHSCREEN")
             finish()
-        }, 1000) // 3000 is the delayed time in milliseconds.
+        }, 1000) // 1000 is the delayed time in milliseconds.
     }
 }

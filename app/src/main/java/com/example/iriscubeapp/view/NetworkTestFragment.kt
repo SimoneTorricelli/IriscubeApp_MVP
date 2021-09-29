@@ -92,7 +92,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     }
 
     fun changeAmountList(list: List<SampleData>?,amount:Int){
-        println(amount)
+        //println(amount)
         movementAdapter.submitList(list?.filter {
             it.id <= amount
         })
@@ -208,6 +208,8 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         if (list!!.isEmpty()) {           //Solamente se so che la lista non è mai vuota
             onMovementsError(Exception("Error MovementException"))
         } else {
+            stepperTouch.count = list!!.size
+            stepperTouch.maxValue = list!!.size
             movementAdapter.submitList(list)
             view?.snack("Lista creata correttamente", color = Color.rgb(80, 170, 80))
         }

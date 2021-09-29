@@ -40,10 +40,9 @@ import java.lang.Exception
 
 const val FLOWER_ID = "movement id"
 
-class FirstFragment : Fragment(){
+class FirstFragment : Fragment() {
 
     private val newMovementActivityRequestCode = 1
-
 
 
     override fun onCreateView(
@@ -53,22 +52,22 @@ class FirstFragment : Fragment(){
 
 
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_first, container, false)
+        val view = inflater.inflate(R.layout.fragment_first, container, false)
 
-        val ttb = AnimationUtils.loadAnimation(context,R.anim.start_anim)
-        val stb = AnimationUtils.loadAnimation(context,R.anim.start_anim_cardview2)
-        val cardView : CardView = view.findViewById(R.id.cardView)
-        val cardViewMoney : CardView = view.findViewById(R.id.cardViewMoney)
-        val diamondImage : ImageView = view.findViewById(R.id.diamondImage)
+        val ttb = AnimationUtils.loadAnimation(context, R.anim.start_anim)
+        val stb = AnimationUtils.loadAnimation(context, R.anim.start_anim_cardview2)
+        val cardView: CardView = view.findViewById(R.id.cardView)
+        val cardViewMoney: CardView = view.findViewById(R.id.cardViewMoney)
+        val diamondImage: ImageView = view.findViewById(R.id.diamondImage)
 
-        val assetManager : AssetManager? = context?.assets
+        val assetManager: AssetManager? = context?.assets
         try {
             assetManager?.let {
                 val diamondAsset: InputStream = it.open("diamond.png")
                 val bitmap = BitmapFactory.decodeStream(diamondAsset)
                 diamondImage.setImageBitmap(bitmap)
             }
-        }catch (e : Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, e.toString())
 
         }
@@ -77,9 +76,10 @@ class FirstFragment : Fragment(){
         cardViewMoney.startAnimation(stb)
 
         val headerAdapter = HeaderAdapter()
-        val movementAdapter = RecycleMovementAdapter { sampleData -> adapterOnClick(sampleData)}
+        val movementAdapter = RecycleMovementAdapter { sampleData -> adapterOnClick(sampleData) }
         val recyclerView: RecyclerView = view.findViewById(R.id.recycle_view)
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = movementAdapter
         recyclerView.apply {
             //edgeEffectFactory = BounceEdgeEffectFactory()
@@ -115,11 +115,11 @@ class FirstFragment : Fragment(){
         val initialConstraint = ConstraintSet()
         val coverConstraint = ConstraintSet()
         coverConstraint.clone(context, R.layout.card_view)
-        val constraintLayout : ConstraintLayout = view.findViewById(R.id.fragment_first)
+        val constraintLayout: ConstraintLayout = view.findViewById(R.id.fragment_first)
         initialConstraint.clone(constraintLayout)
 
-        val cardView : CardView = view.findViewById(R.id.cardView)
-        val textView : TextView = view.findViewById(R.id.textConto)
+        val cardView: CardView = view.findViewById(R.id.cardView)
+        val textView: TextView = view.findViewById(R.id.textConto)
 
 
         cardView.setOnClickListener {
@@ -137,8 +137,7 @@ class FirstFragment : Fragment(){
                 anim.duration = 300
                 anim.start()
                 isCoverView = true
-            }
-            else{
+            } else {
                 TransitionManager.beginDelayedTransition(constraintLayout)
                 initialConstraint.applyTo(constraintLayout)
 
@@ -168,20 +167,18 @@ class FirstFragment : Fragment(){
 
         // on below line we are creating a variable for our button
         // which we are using to dismiss our dialog.
-        val stb = AnimationUtils.loadAnimation(context,R.anim.start_anim_cardview2)
+        val stb = AnimationUtils.loadAnimation(context, R.anim.start_anim_cardview2)
         val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
 
         btnClose.startAnimation(stb)
 
-        val titleText : TextView= view.findViewById(R.id.movement_title2)
-        val valueText : TextView= view.findViewById(R.id.movement_value2)
-        val descriptionText : TextView= view.findViewById(R.id.movement_description2)
+        val titleText: TextView = view.findViewById(R.id.movement_title2)
+        val valueText: TextView = view.findViewById(R.id.movement_value2)
+        val descriptionText: TextView = view.findViewById(R.id.movement_description2)
 
         titleText.text = "Titolo movimento: " + movement.title
         valueText.text = "Quantità movimento: " + movement.value.toString() + " €"
         descriptionText.text = "Descrizione movimento: " + movement.description
-
-
 
 
         // on below line we are adding on click listener

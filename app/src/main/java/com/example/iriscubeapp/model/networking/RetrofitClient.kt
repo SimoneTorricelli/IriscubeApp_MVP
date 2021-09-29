@@ -11,7 +11,8 @@ class RetrofitClient {
     companion object {
         private const val BASE_URL = "https://mocki.io/v1/"
 
-        private val loggingInterceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        private val loggingInterceptor =
+            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
         private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .connectTimeout(5, TimeUnit.SECONDS)

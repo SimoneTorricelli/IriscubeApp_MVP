@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class Repository(var client:WebService) : NetworkTestContract.Repository{
+class Repository(var client: WebService) : NetworkTestContract.Repository {
 
     init {
         client = RetrofitClient.retrofit

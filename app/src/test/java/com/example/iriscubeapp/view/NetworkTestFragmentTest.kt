@@ -9,10 +9,6 @@ class NetworkTestFragmentTest : TestCase() {
 
     private val presenter = NetworkTestPresenter()
 
-    fun testOnCreate() {
-        presenter.getMovement()
-
-    }
 
     fun testOnCreateView() {}
 

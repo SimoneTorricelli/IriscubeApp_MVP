@@ -10,12 +10,13 @@ import com.example.iriscubeapp.R
 
 /* A list always displaying one element: the number of flowers. */
 
-class HeaderAdapter: RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>() {
+class HeaderAdapter : RecyclerView.Adapter<HeaderAdapter.HeaderViewHolder>() {
     private var movementData: Int = 0
 
     /* ViewHolder for displaying header. */
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val movementDataNumberTextView: TextView = itemView.findViewById(R.id.movement_number_text)
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val movementDataNumberTextView: TextView =
+            itemView.findViewById(R.id.movement_number_text)
 
         fun bind(movementCount: Int) {
             movementDataNumberTextView.text = movementCount.toString()

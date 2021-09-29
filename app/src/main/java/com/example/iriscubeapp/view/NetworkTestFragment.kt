@@ -68,8 +68,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
             //edgeEffectFactory = BounceEdgeEffectFactory()
         }
 
-
-
         return view
     }
 
@@ -87,7 +85,8 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     private fun onGetMovementsClick() {
 
         nextTodoButton.setOnClickListener {
-            presenter.getMovement()
+            GlobalScope.launch { presenter.getMovement() }
+
             headerAdapter.updateMovementCount(10)
         }
 
@@ -149,7 +148,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         valueText.text = getString(R.string.quantita_movimento, movement.value)
         descriptionText.text = getString(R.string.descrizione_movimento, movement.description)
 
-
         // on below line we are adding on click listener
         // for our dismissing the dialog button.
         btnClose.setOnClickListener {
@@ -168,11 +166,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         // on below line we are calling
         // a show method to display a dialog.
         dialog?.show()
-        /*
-        val intent = Intent(this, MovementDetailActivity()::class.java)
-        intent.putExtra(MOVEMENT_ID, movement.id)
-        startActivity(intent)
-        */
 
     }
 

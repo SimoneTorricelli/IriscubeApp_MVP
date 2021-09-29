@@ -21,11 +21,18 @@ interface NetworkTestContract {
      * */
     interface Presenter {
         fun bindView(view: View)
-        fun getMovement()
-        fun insertMovement(movementTitle: String?, movementDescription: String?,movementValue: Double?)
+        suspend fun getMovement(): Boolean
+        fun insertMovement(
+            movementTitle: String?,
+            movementDescription: String?,
+            movementValue: Double?
+        )
     }
 
-    interface Repository{
-        suspend fun getMovement() : Response<Array<SampleData>>
+    /**
+     * Interface implemented by [Repository]
+     * */
+    interface Repository {
+        suspend fun getMovement(): Response<Array<SampleData>>
     }
 }

@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.example.iriscubeapp.R
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     /**
      * [AppCompatActivity] functions
      * */
@@ -16,11 +16,10 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().replace(R.id.mainActivityFragmentContainer,NetworkTestFragment()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.mainActivityFragmentContainer, NetworkTestFragment()).commit()
 
     }
-
-
 
 
 }

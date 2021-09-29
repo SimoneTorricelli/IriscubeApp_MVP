@@ -29,16 +29,16 @@ class SplashScreen : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val diamondImage : ImageView = findViewById(R.id.SplashScreenImage)
+        val diamondImage: ImageView = findViewById(R.id.SplashScreenImage)
 
-        val assetManager : AssetManager? = applicationContext?.assets
+        val assetManager: AssetManager? = applicationContext?.assets
         try {
             assetManager?.let {
                 val diamondAsset: InputStream = it.open("diamond.png")
                 val bitmap = BitmapFactory.decodeStream(diamondAsset)
                 diamondImage.setImageBitmap(bitmap)
             }
-        }catch (e : Exception) {
+        } catch (e: Exception) {
             Log.e(ContentValues.TAG, e.toString())
 
         }

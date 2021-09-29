@@ -2,6 +2,9 @@
     <string name="app_name">Iriscube App</string>
     <string name="get_your_movements">Get your movements</string>
     <string name="title_activity_splash_screen">Splash_Screen</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="titolo_movimento">Titolo movimento = %1$s</string>
+    <string name="descrizione_movimento">Descrizione movimento = %1$s</string>
+    <string name="quantita_movimento">Quantità movimento = %1$.3f €</string>
+
 </resources>

@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +28,6 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_network_test.*
 import kotlinx.coroutines.*
 import retrofit2.Response
-import kotlin.random.Random
 
 class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     /**
@@ -86,13 +84,11 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         onGetMovementsClick()
     }
 
-    fun onGetMovementsClick() {
+    private fun onGetMovementsClick() {
 
         nextTodoButton.setOnClickListener {
             presenter.getMovement()
             headerAdapter.updateMovementCount(10)
-
-
         }
 
     }
@@ -131,7 +127,7 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         }
 
 
-    @SuppressLint("SetTextI18n")
+    //@SuppressLint("SetTextI18n")
     private fun adapterOnClick(movement: SampleData) {
         val dialog = context?.let { it1 -> BottomSheetDialog(it1) }
 
@@ -149,9 +145,9 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         val valueText: TextView = view.findViewById(R.id.movement_value2)
         val descriptionText: TextView = view.findViewById(R.id.movement_description2)
 
-        titleText.text = "Titolo movimento: " + movement.title
-        valueText.text = "Quantità movimento: " + movement.value.toString() + " €"
-        descriptionText.text = "Descrizione movimento: " + movement.description
+        titleText.text = getString(R.string.titolo_movimento, movement.title)
+        valueText.text = getString(R.string.quantita_movimento, movement.value)
+        descriptionText.text = getString(R.string.descrizione_movimento, movement.description)
 
 
         // on below line we are adding on click listener

@@ -3,8 +3,8 @@
     <string name="get_your_movements">Get your movements</string>
     <string name="title_activity_splash_screen">Splash_Screen</string>
 
-    <string name="titolo_movimento">Titolo movimento = %1$s</string>
-    <string name="descrizione_movimento">Descrizione movimento = %1$s</string>
-    <string name="quantita_movimento">Quantità movimento = %1$.3f €</string>
+    <string name="titolo_movimento">Titolo movimento : %1$s</string>
+    <string name="descrizione_movimento">Descrizione movimento : %1$s</string>
+    <string name="quantita_movimento">Quantità movimento : %1$.3f €</string>
 
 </resources>

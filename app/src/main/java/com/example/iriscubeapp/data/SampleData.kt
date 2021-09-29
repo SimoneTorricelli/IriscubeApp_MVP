@@ -1,4 +1,3 @@
-import androidx.annotation.DrawableRes
 import com.google.gson.annotations.SerializedName
 
 data class SampleData(

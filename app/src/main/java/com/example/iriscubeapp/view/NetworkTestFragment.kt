@@ -2,7 +2,6 @@ package com.example.iriscubeapp.view
 
 import MovementException
 import SampleData
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -111,7 +110,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         coroutineScope {
             val list = ArrayList<SampleData>()
             if (result.isSuccessful) {
-                val gson = GsonBuilder().setPrettyPrinting().create()
                 var i = 0
                 while (i < result.body()?.size ?: 0) {
                     result.body()?.elementAt(i)?.let { list.add(it) }

@@ -7,7 +7,6 @@ import com.example.iriscubeapp.model.networking.Repository
 import com.example.iriscubeapp.model.networking.RetrofitClient
 import com.example.iriscubeapp.model.networking.WebService
 import kotlinx.coroutines.*
-import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 
@@ -56,26 +55,28 @@ class NetworkTestPresenter : CoroutineScope, NetworkTestContract.Presenter {
 
     override suspend fun getMovement(): Boolean {
         var testFun = false
-        val job = launch(Dispatchers.Main) {
-            try {
-                val response = client?.let { Repository(client = it).getMovement() }
-                if (response != null) {
-                    val exception: Exception = Exception("Error ")
-                    val movementException: MovementException =
-                        MovementException("Errore ${response.code()}", exception)
-                    if (response.code() != 200) {
-                        testFun = false
-                        view?.onMovementsError(movementException)
-                    } else {
-                        testFun = true
-                        view?.onMovementsAvailable(response)
+        val job = coroutineScope {
+            launch(Dispatchers.Main) {
+                try {
+                    val response = client?.let { Repository(client = it).getMovement() }
+                    if (response != null) {
+                        val exception: Exception = Exception("Error ")
+                        val movementException =
+                            MovementException("Error:  ${response.code()}", exception)
+                        if (response.code() != 200) {
+                            testFun = false
+                            view?.onMovementsError(movementException)
+                        } else {
+                            testFun = true
+                            view?.onMovementsAvailable(response)
+                        }
                     }
-                }
 
-            } catch (error: MovementException) {
-                view?.onMovementsError(error)
-            } catch (genericError: Exception) {
-                view?.onMovementsError(genericError)
+                } catch (error: MovementException) {
+                    view?.onMovementsError(error)
+                } catch (genericError: Exception) {
+                    view?.onMovementsError(genericError)
+                }
             }
         }
         job.join()

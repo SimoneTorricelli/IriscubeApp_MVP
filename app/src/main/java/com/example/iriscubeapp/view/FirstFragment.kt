@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.exampleapp.recycleBankMovement.HeaderAdapter
 import com.example.exampleapp.recycleBankMovement.RecycleMovementAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.iriscubeapp.R
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -25,7 +23,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.lifecycle.observe
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.graphics.BitmapFactory
@@ -37,8 +34,6 @@ import android.util.Log
 import java.io.InputStream
 import java.lang.Exception
 
-
-const val FLOWER_ID = "movement id"
 
 class FirstFragment : Fragment() {
 
@@ -104,9 +99,6 @@ class FirstFragment : Fragment() {
         return view
     }
 
-    fun getHelloWorldString(): String {
-        return "HELLO_WORLD"
-    }
 
     private fun addConstraintSetAnimation(view: View) {
 

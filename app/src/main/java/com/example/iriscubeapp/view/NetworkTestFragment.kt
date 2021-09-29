@@ -83,15 +83,14 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
 
         stepperTouch.addStepCallback(object : OnStepCallback {
             override fun onStep(value: Int, positive: Boolean) = runBlocking{
-
-                changeAmountList(list,value)
+                changeAmountList(value)
             }
         })
 
         return view
     }
 
-    fun changeAmountList(list: List<SampleData>?,amount:Int){
+    fun changeAmountList(amount:Int){
         //println(amount)
         movementAdapter.submitList(list?.filter {
             it.id <= amount

@@ -23,10 +23,13 @@ import com.example.iriscubeapp.contract.NetworkTestContract
 import com.example.iriscubeapp.presenter.NetworkTestPresenter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_network_test.*
 import kotlinx.coroutines.*
 import retrofit2.Response
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer.OnDrawerStateChangeListener
+
 
 class NetworkTestFragment : Fragment(), NetworkTestContract.View {
     /**
@@ -66,6 +69,8 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
         recyclerView.apply {
             //edgeEffectFactory = BounceEdgeEffectFactory()
         }
+
+
 
         return view
     }

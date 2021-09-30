@@ -115,11 +115,6 @@ class NetworkTestFragment : Fragment(), NetworkTestContract.View {
                 changeAmountList(value)
             }
         })
-
-        object {
-            val TAG = "ModalBottomSheet"
-        }
-
         return view
     }
 

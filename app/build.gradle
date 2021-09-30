@@ -55,8 +55,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.2.0'
     implementation 'androidx.databinding:databinding-runtime:4.1.3'
-    implementation files('C:\\Users\\Ribes\\Desktop\\Progetto Esempio Mobile\\android-training-master\\bouncy-release.aar')
-    implementation files('C:\\Users\\Ribes\\Desktop\\Progetto Esempio Mobile\\android-training-master\\bouncy-release.aar')
     implementation files('libs/bouncy-release.aar')
     testImplementation 'junit:junit:4.+'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2'

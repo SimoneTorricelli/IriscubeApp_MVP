@@ -4,6 +4,17 @@
         <item name="android:actionBarStyle">@style/Widget.AppTheme.ActionBar.Fullscreen</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
+
+    </style>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight">
+         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 
     <style name="ThemeOverlay.IriscubeApp.FullscreenContainer" parent="">

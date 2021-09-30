@@ -160,9 +160,7 @@ class FirstFragment : Fragment() {
         // on below line we are creating a variable for our button
         // which we are using to dismiss our dialog.
         val stb = AnimationUtils.loadAnimation(context, R.anim.start_anim_cardview2)
-        val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
 
-        btnClose.startAnimation(stb)
 
         val titleText: TextView = view.findViewById(R.id.movement_title2)
         val valueText: TextView = view.findViewById(R.id.movement_value2)
@@ -175,11 +173,7 @@ class FirstFragment : Fragment() {
 
         // on below line we are adding on click listener
         // for our dismissing the dialog button.
-        btnClose.setOnClickListener {
-            // on below line we are calling a dismiss
-            // method to close our dialog.
-            dialog?.dismiss()
-        }
+
         // below line is use to set cancelable to avoid
         // closing of dialog box when clicking on the screen.
         dialog?.setCancelable(false)

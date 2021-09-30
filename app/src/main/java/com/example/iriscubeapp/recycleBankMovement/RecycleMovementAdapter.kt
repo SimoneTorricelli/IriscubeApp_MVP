@@ -15,8 +15,11 @@ import SampleData
 class RecycleMovementAdapter(private val onClick: (SampleData) -> Unit) :
     ListAdapter<SampleData, RecycleMovementAdapter.MovementViewHolder>(MovementDiffCallback) {
 
+
+
+
     /* ViewHolder for sampleMovementData, takes in the inflated view and the onClick behavior. */
-    class MovementViewHolder(itemView: View, val onClick: (SampleData) -> Unit) :
+    inner class MovementViewHolder(itemView: View, val onClick: (SampleData) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val movementTitle: TextView = itemView.findViewById(R.id.movement_title)
         private val movementImageView: ImageView = itemView.findViewById(R.id.movement_image)
@@ -40,13 +43,72 @@ class RecycleMovementAdapter(private val onClick: (SampleData) -> Unit) :
             movementDescription.text = movement.description
             movementValue.text = movement.value.toString() + " €"
             movementImageView.setImageResource(R.drawable.ic_action_name)
+
+        }
+
+        /*
+        funzione per fare il bind delle TodoClass o qualsiasi altra classe
+
+        fun bindTodo(toDoObject: TodoClass) {
+            currentMovement = movement
+            movementTitle.text = movement.title
+            movementDescription.text = movement.description
+            movementValue.text = movement.value.toString() + " €"
+            movementImageView.setImageResource(R.drawable.ic_action_name)
             //if (movement.image != null) {
             // movementImageView.setImageResource(movement.image)
             //} else {
             //   movementImageView.setImageResource(R.drawable.abc_vector_test)
             //}
         }
+        */
+
     }
+
+    /*
+
+    Nuovo ModelView con la scelta del tipo
+
+    //--------onCreateViewHolder: inflate layout with view holder-------override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+    return when (viewType) {
+        TYPE_FAMILY -> {
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.family_item, parent, false)
+            FamilyViewHolder(view)
+        }
+        TYPE_FRIEND -> {
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.friend_item, parent, false)
+            FriendViewHolder(view)
+        }
+        TYPE_COLLEAGUE -> {
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.colleague_item, parent, false)
+            ColleagueViewHolder(view)
+        }
+        else -> throw IllegalArgumentException("Invalid view type")
+    }
+}
+//-----------onCreateViewHolder: bind view with data model---------
+override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
+    val element = adapterDataList[position]
+    when (holder) {
+        is FamilyViewHolder -> holder.bind(element as FamilyDataModel)
+        is FriendViewHolder -> holder.bind(element as FriendDataModel)
+        is ColleagueViewHolder -> holder.bind(element as ColleagueDataModel)
+        else -> throw IllegalArgumentException()
+    }
+}
+override fun getItemViewType(position: Int): Int {
+    val comparable = data[position]
+    return when (comparable) {
+        is String -> TYPE_FAMILY
+        is Trailer -> TYPE_FRIEND
+        is Review -> TYPE_COLLEAGUE
+        else -> throw IllegalArgumentException("Invalid type of data " + position)
+    }
+}
+     */
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovementViewHolder {
@@ -71,3 +133,4 @@ object MovementDiffCallback : DiffUtil.ItemCallback<SampleData>() {
         return oldItem.id == newItem.id
     }
 }
+

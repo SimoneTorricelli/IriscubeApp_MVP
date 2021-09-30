@@ -9,42 +9,146 @@
 
 
     <Button
+        app:icon="@drawable/ic_action_name"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/nextTodoButton"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorAccent"
-        android:background="@drawable/primary_round"
         android:text="@string/get_your_movements"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
         android:textAlignment="center"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/card_recycle"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.111" />
 
     <nl.dionsegijn.steppertouch.StepperTouch
         android:id="@+id/stepperTouch"
-        app:stepperTextColor="@color/orange_2"
-        android:backgroundTint="@color/orange_2"
-        app:stepperBackgroundColor="@color/orange_1"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:backgroundTint="@color/orange_2"
         app:layout_constraintBottom_toTopOf="@+id/card_recycle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nextTodoButton" />
+        app:layout_constraintTop_toBottomOf="@+id/nextTodoButton"
+        app:layout_constraintVertical_bias="0.088"
+        app:stepperBackgroundColor="@color/orange_1"
+        app:stepperTextColor="@color/orange_2" />
+
+    <FrameLayout
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/card_recycle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepperTouch"
+        app:layout_constraintVertical_bias="0.847">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:outlineSpotShadowColor="@color/orange_2"
+            app:cardBackgroundColor="@color/salmon"
+            app:cardCornerRadius="25dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="false"
+            app:layout_constraintBottom_toTopOf="@+id/next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.065">
+
+
+            <TextView
+                android:id="@+id/textConto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="20dp"
+                android:paddingBottom="40dp"
+                android:text="Il mio conto"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/iban"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingBottom="40dp"
+                android:text="IT1237AD74192DSA1237"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/diamondImage"
+                android:layout_width="163dp"
+                android:layout_height="90dp"
+                android:layout_gravity="top|right"
+                android:paddingHorizontal="20dp"
+                android:src="@mipmap/diamond" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewMoney"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="12dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false">
+
+            <TextView
+                android:id="@+id/money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingBottom="0dp"
+                android:paddingTop="5dp"
+                android:text="54.984,12 €"
+                android:textAlignment="center"
+                android:textColor="@color/orange_2"
+                android:textSize="25sp"
+                android:textStyle="normal" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center|bottom"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="380dp"
         android:outlineSpotShadowColor="@color/orange_2"
         android:paddingHorizontal="30dp"
         android:paddingBottom="20dp"
-        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
@@ -81,6 +185,11 @@
         </com.factor.bouncy.BouncyRecyclerView>
 
     </androidx.cardview.widget.CardView>
+
+
+
+
+
 
 
 
